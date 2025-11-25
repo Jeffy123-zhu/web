@@ -1,46 +1,46 @@
-# NeuralCanvas - AI数据可视化工具
+# NeuralCanvas - AI Data Visualization Tool
 
-一个基于 React 和 AI 的数据可视化应用，可以上传 CSV 或 JSON 文件，自动分析数据并生成可视化图表。
+A React and AI-powered data visualization application that allows you to upload CSV or JSON files, automatically analyze data, and generate visualization charts.
 
-## 功能特性
+## Features
 
-- 📊 支持 CSV 和 JSON 文件上传
-- 🤖 AI 驱动的数据分析
-- 📈 自动生成数据可视化图表
-- ✨ 动态粒子背景效果
-- 🎨 现代化的 UI 设计
+-  Support for CSV and JSON file uploads
+-  AI-driven data analysis
+-  Automatic data visualization chart generation
+-  Dynamic particle background effects
+-  Modern UI design
 
-## 安装依赖
+## Install Dependencies
 
 ```bash
 npm install
 ```
 
-## 运行项目
+## Run Project
 
 ```bash
 npm run dev
 ```
 
-然后在浏览器中打开 http://localhost:5173
+Then open http://localhost:5173 in your browser
 
-## 构建生产版本
+## Build for Production
 
 ```bash
 npm run build
 ```
 
-## 技术栈
+## Tech Stack
 
 - React 18
 - Vite
 - Tailwind CSS
-- Lucide React (图标)
-- Canvas API (动画效果)
+- Lucide React (icons)
+- Canvas API (animation effects)
 
-## 使用说明
+## Usage Instructions
 
-1. 点击上传按钮选择 CSV 或 JSON 文件
-2. 系统会自动解析并显示数据统计
-3. 点击"AI 分析"按钮获取智能洞察
-4. 查看自动生成的可视化图表和数据预览
+1. Click the upload button to select a CSV or JSON file
+2. The system will automatically parse and display data statistics
+3. Click the "AI Analysis" button to get intelligent insights
+4. View automatically generated visualization charts and data preview
