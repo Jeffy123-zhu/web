@@ -19,7 +19,7 @@ export default function NeuralCanvas() {
       const obj = {};
       headers.forEach((header, i) => {
         const val = values[i]?.trim();
-        // try to convert to number
+        // Try to convert to number
         obj[header] = isNaN(val) ? val : parseFloat(val);
       });
       return obj;
@@ -41,14 +41,14 @@ export default function NeuralCanvas() {
         setData(parsed);
       } else if (uploadedFile.name.endsWith('.json')) {
         const json = JSON.parse(text);
-        // convert json to table format
+        // Convert JSON to table format
         const rows = Array.isArray(json) ? json : [json];
         const headers = Object.keys(rows[0] || {});
         setData({ headers, rows });
       }
     } catch (err) {
       console.error('Parse error:', err);
-      alert('Error parsing file. Please check format.');
+      alert('Error parsing file. Please check the format.');
     }
   };
 
@@ -58,7 +58,7 @@ export default function NeuralCanvas() {
 
     setAnalyzing(true);
     
-    // prepare data summary for AI
+    // Prepare data summary for AI
     const summary = {
       columns: data.headers,
       rowCount: data.rows.length,
@@ -101,7 +101,7 @@ Sample data: ${JSON.stringify(summary.sample)}`
       setInsights(analysis);
     } catch (err) {
       console.error('Analysis error:', err);
-      // fallback insights
+      // Fallback insights
       setInsights({
         summary: 'Dataset loaded successfully with ' + data.rows.length + ' records',
         key_findings: [
@@ -152,7 +152,7 @@ Sample data: ${JSON.stringify(summary.sample)}`
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(99, 102, 241, ${this.opacity})`;
+        ctx.fillStyle = `rgba(6, 182, 212, ${this.opacity})`;
         ctx.fill();
       }
     }
@@ -170,7 +170,7 @@ Sample data: ${JSON.stringify(summary.sample)}`
         p.draw();
       });
 
-      // draw connections
+      // Draw connections
       particles.forEach((p1, i) => {
         particles.slice(i + 1).forEach(p2 => {
           const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
@@ -178,7 +178,7 @@ Sample data: ${JSON.stringify(summary.sample)}`
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(99, 102, 241, ${0.15 * (1 - dist / 100)})`;
+            ctx.strokeStyle = `rgba(6, 182, 212, ${0.15 * (1 - dist / 100)})`;
             ctx.stroke();
           }
         });
@@ -200,7 +200,7 @@ Sample data: ${JSON.stringify(summary.sample)}`
   const renderChart = () => {
     if (!data || !data.rows.length) return null;
 
-    // find numeric columns
+    // Find numeric columns
     const numericCols = data.headers.filter(h => 
       typeof data.rows[0][h] === 'number'
     );
@@ -210,7 +210,7 @@ Sample data: ${JSON.stringify(summary.sample)}`
     const col = numericCols[0];
     const values = data.rows.map(r => r[col]).filter(v => !isNaN(v));
     const max = Math.max(...values);
-    const chartData = values.slice(0, 20); // first 20 for display
+    const chartData = values.slice(0, 20); // First 20 for display
 
     return (
       <div className="space-y-2">
@@ -221,7 +221,7 @@ Sample data: ${JSON.stringify(summary.sample)}`
               <span className="text-xs text-gray-500 w-8">{i + 1}</span>
               <div className="flex-1 h-6 bg-gray-800 rounded overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-indigo-500 to-purple-500"
+                  className="h-full bg-gradient-to-r from-cyan-500 to-teal-500"
                   style={{ width: `${(val / max) * 100}%` }}
                 />
               </div>
@@ -259,7 +259,7 @@ Sample data: ${JSON.stringify(summary.sample)}`
       <canvas
         ref={canvasRef}
         className="fixed inset-0 w-full h-full"
-        style={{ background: 'linear-gradient(135deg, #030712 0%, #0c1222 100%)' }}
+        style={{ background: 'linear-gradient(135deg, #020617 0%, #0a1628 100%)' }}
       />
 
       {/* Content */}
@@ -270,8 +270,8 @@ Sample data: ${JSON.stringify(summary.sample)}`
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg blur-lg opacity-50" />
-                  <div className="relative bg-gradient-to-r from-indigo-600 to-purple-600 p-2 rounded-lg">
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-teal-500 rounded-lg blur-lg opacity-50" />
+                  <div className="relative bg-gradient-to-r from-cyan-600 to-teal-600 p-2 rounded-lg">
                     <Brain className="w-6 h-6" />
                   </div>
                 </div>
@@ -280,9 +280,9 @@ Sample data: ${JSON.stringify(summary.sample)}`
                   <p className="text-sm text-gray-400">AI-Powered Visual Data Explorer</p>
                 </div>
               </div>
-              <div className="flex items-center space-x-2 bg-indigo-500/10 px-3 py-1.5 rounded-lg border border-indigo-500/20">
-                <Zap className="w-4 h-4 text-indigo-400" />
-                <span className="text-sm text-indigo-400 font-medium">AI Enhanced</span>
+              <div className="flex items-center space-x-2 bg-cyan-500/10 px-3 py-1.5 rounded-lg border border-cyan-500/20">
+                <Zap className="w-4 h-4 text-cyan-400" />
+                <span className="text-sm text-cyan-400 font-medium">AI Enhanced</span>
               </div>
             </div>
           </div>
@@ -291,7 +291,7 @@ Sample data: ${JSON.stringify(summary.sample)}`
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Hero */}
           <div className="text-center mb-10">
-            <h2 className="text-4xl font-bold mb-3 bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
+            <h2 className="text-4xl font-bold mb-3 bg-gradient-to-r from-cyan-300 via-teal-300 to-emerald-300 bg-clip-text text-transparent">
               Transform Data Into Insights
             </h2>
             <p className="text-lg text-gray-400 max-w-2xl mx-auto">
@@ -302,11 +302,11 @@ Sample data: ${JSON.stringify(summary.sample)}`
           {/* Upload Section */}
           {!data ? (
             <div className="max-w-2xl mx-auto">
-              <div className="bg-gray-900/80 backdrop-blur-md border-2 border-dashed border-gray-700 rounded-xl p-12 text-center hover:border-indigo-500 transition-colors">
+              <div className="bg-gray-900/80 backdrop-blur-md border-2 border-dashed border-gray-700 rounded-xl p-12 text-center hover:border-cyan-500 transition-colors">
                 <Upload className="w-16 h-16 mx-auto mb-4 text-gray-500" />
                 <h3 className="text-xl font-bold mb-2">Upload Your Data</h3>
                 <p className="text-gray-400 mb-6">
-                  Support for CSV and JSON files up to 10MB
+                  Supports CSV and JSON files up to 10MB
                 </p>
                 <label className="inline-block">
                   <input
@@ -315,7 +315,7 @@ Sample data: ${JSON.stringify(summary.sample)}`
                     onChange={handleFileUpload}
                     className="hidden"
                   />
-                  <span className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 rounded-lg font-medium cursor-pointer inline-block transition-all">
+                  <span className="px-6 py-3 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 rounded-lg font-medium cursor-pointer inline-block transition-all">
                     Choose File
                   </span>
                 </label>
@@ -327,17 +327,17 @@ Sample data: ${JSON.stringify(summary.sample)}`
               {/* Features */}
               <div className="grid md:grid-cols-3 gap-4 mt-8">
                 <div className="bg-gray-900/50 backdrop-blur-md border border-gray-800 rounded-lg p-4">
-                  <Sparkles className="w-8 h-8 text-indigo-400 mb-2" />
+                  <Sparkles className="w-8 h-8 text-cyan-400 mb-2" />
                   <h4 className="font-semibold mb-1">AI Analysis</h4>
                   <p className="text-sm text-gray-400">Automatic pattern detection and insights</p>
                 </div>
                 <div className="bg-gray-900/50 backdrop-blur-md border border-gray-800 rounded-lg p-4">
-                  <BarChart3 className="w-8 h-8 text-purple-400 mb-2" />
+                  <BarChart3 className="w-8 h-8 text-teal-400 mb-2" />
                   <h4 className="font-semibold mb-1">Smart Visualizations</h4>
                   <p className="text-sm text-gray-400">Dynamic charts based on data type</p>
                 </div>
                 <div className="bg-gray-900/50 backdrop-blur-md border border-gray-800 rounded-lg p-4">
-                  <TrendingUp className="w-8 h-8 text-pink-400 mb-2" />
+                  <TrendingUp className="w-8 h-8 text-emerald-400 mb-2" />
                   <h4 className="font-semibold mb-1">Trend Detection</h4>
                   <p className="text-sm text-gray-400">Identify correlations and anomalies</p>
                 </div>
@@ -348,22 +348,22 @@ Sample data: ${JSON.stringify(summary.sample)}`
               {/* Stats Overview */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="bg-gray-900/80 backdrop-blur-md border border-gray-800 rounded-lg p-4">
-                  <Database className="w-8 h-8 text-blue-400 mb-2" />
+                  <Database className="w-8 h-8 text-cyan-400 mb-2" />
                   <div className="text-2xl font-bold">{stats?.totalRows}</div>
                   <div className="text-sm text-gray-400">Total Records</div>
                 </div>
                 <div className="bg-gray-900/80 backdrop-blur-md border border-gray-800 rounded-lg p-4">
-                  <BarChart3 className="w-8 h-8 text-green-400 mb-2" />
+                  <BarChart3 className="w-8 h-8 text-teal-400 mb-2" />
                   <div className="text-2xl font-bold">{stats?.totalCols}</div>
                   <div className="text-sm text-gray-400">Columns</div>
                 </div>
                 <div className="bg-gray-900/80 backdrop-blur-md border border-gray-800 rounded-lg p-4">
-                  <TrendingUp className="w-8 h-8 text-purple-400 mb-2" />
+                  <TrendingUp className="w-8 h-8 text-emerald-400 mb-2" />
                   <div className="text-2xl font-bold">{stats?.numericCols}</div>
                   <div className="text-sm text-gray-400">Numeric Fields</div>
                 </div>
                 <div className="bg-gray-900/80 backdrop-blur-md border border-gray-800 rounded-lg p-4">
-                  <PieChart className="w-8 h-8 text-pink-400 mb-2" />
+                  <PieChart className="w-8 h-8 text-sky-400 mb-2" />
                   <div className="text-2xl font-bold">{stats?.categoricalCols}</div>
                   <div className="text-sm text-gray-400">Categorical</div>
                 </div>
@@ -374,7 +374,7 @@ Sample data: ${JSON.stringify(summary.sample)}`
                 <button
                   onClick={analyzeData}
                   disabled={analyzing}
-                  className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 disabled:opacity-50 py-4 rounded-lg font-medium flex items-center justify-center space-x-2"
+                  className="w-full bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 disabled:opacity-50 py-4 rounded-lg font-medium flex items-center justify-center space-x-2"
                 >
                   {analyzing ? (
                     <>
@@ -394,22 +394,22 @@ Sample data: ${JSON.stringify(summary.sample)}`
               {insights && (
                 <div className="bg-gray-900/80 backdrop-blur-md border border-gray-800 rounded-xl p-6">
                   <h3 className="text-xl font-bold mb-4 flex items-center">
-                    <Brain className="w-6 h-6 mr-2 text-indigo-400" />
+                    <Brain className="w-6 h-6 mr-2 text-cyan-400" />
                     AI Insights
                   </h3>
                   
                   <div className="space-y-4">
                     <div>
-                      <h4 className="font-semibold text-indigo-300 mb-2">Summary</h4>
+                      <h4 className="font-semibold text-cyan-300 mb-2">Summary</h4>
                       <p className="text-gray-300">{insights.summary}</p>
                     </div>
 
                     <div>
-                      <h4 className="font-semibold text-purple-300 mb-2">Key Findings</h4>
+                      <h4 className="font-semibold text-teal-300 mb-2">Key Findings</h4>
                       <ul className="space-y-1">
                         {insights.key_findings.map((finding, i) => (
                           <li key={i} className="flex items-start space-x-2 text-gray-300">
-                            <span className="text-indigo-400 mt-1">•</span>
+                            <span className="text-cyan-400 mt-1">•</span>
                             <span>{finding}</span>
                           </li>
                         ))}
@@ -417,11 +417,11 @@ Sample data: ${JSON.stringify(summary.sample)}`
                     </div>
 
                     <div>
-                      <h4 className="font-semibold text-pink-300 mb-2">Patterns Detected</h4>
+                      <h4 className="font-semibold text-emerald-300 mb-2">Patterns Detected</h4>
                       <ul className="space-y-1">
                         {insights.patterns.map((pattern, i) => (
                           <li key={i} className="flex items-start space-x-2 text-gray-300">
-                            <TrendingUp className="w-4 h-4 text-pink-400 mt-0.5 flex-shrink-0" />
+                            <TrendingUp className="w-4 h-4 text-emerald-400 mt-0.5 flex-shrink-0" />
                             <span>{pattern}</span>
                           </li>
                         ))}
@@ -429,11 +429,11 @@ Sample data: ${JSON.stringify(summary.sample)}`
                     </div>
 
                     <div>
-                      <h4 className="font-semibold text-green-300 mb-2">Recommendations</h4>
+                      <h4 className="font-semibold text-sky-300 mb-2">Recommendations</h4>
                       <ul className="space-y-1">
                         {insights.recommendations.map((rec, i) => (
                           <li key={i} className="flex items-start space-x-2 text-gray-300">
-                            <Sparkles className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
+                            <Sparkles className="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" />
                             <span>{rec}</span>
                           </li>
                         ))}
@@ -443,7 +443,7 @@ Sample data: ${JSON.stringify(summary.sample)}`
                     <div className="pt-4 border-t border-gray-700 flex items-center justify-between">
                       <div>
                         <span className="text-sm text-gray-400">Data Quality: </span>
-                        <span className="font-semibold text-indigo-300 capitalize">
+                        <span className="font-semibold text-cyan-300 capitalize">
                           {insights.data_quality}
                         </span>
                       </div>
@@ -455,7 +455,7 @@ Sample data: ${JSON.stringify(summary.sample)}`
               {/* Visualization */}
               <div className="bg-gray-900/80 backdrop-blur-md border border-gray-800 rounded-xl p-6">
                 <h3 className="text-xl font-bold mb-4 flex items-center">
-                  <BarChart3 className="w-6 h-6 mr-2 text-purple-400" />
+                  <BarChart3 className="w-6 h-6 mr-2 text-teal-400" />
                   Data Visualization
                 </h3>
                 {renderChart()}
@@ -507,7 +507,7 @@ Sample data: ${JSON.stringify(summary.sample)}`
                 </button>
                 <button
                   onClick={() => analyzeData()}
-                  className="flex-1 bg-indigo-600 hover:bg-indigo-700 py-3 rounded-lg font-medium transition-colors"
+                  className="flex-1 bg-cyan-600 hover:bg-cyan-700 py-3 rounded-lg font-medium transition-colors"
                 >
                   Re-analyze
                 </button>
